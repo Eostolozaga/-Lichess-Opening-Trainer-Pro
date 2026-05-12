@@ -50,3 +50,34 @@ resources/engines/*.zip
 .env
 Chess_Orchestrator_v2.ipynb
 src/notebooks/Scraping/Chess_Scraper.ipynb
+
+# ═══ SENSIBLES / PERSONALES (NO COMMITEAR) ═══
+resources/API KEYS USADAS.txt
+resources/Ideas proyecto ML.txt
+
+# ═══ PRESENTACIÓN: solo el archivo final ═══
+# Excluir versiones intermedias de pruebas
+resources/Presentacion.html
+resources/Presentacion_test.html
+resources/Presentacion_test_EMBEBIDA.html
+resources/Presentacion_EMBEBIDA.html
+
+# ═══ BASURA del "Guardar como" del navegador ═══
+*_files/
+
+# ═══ SENSIBLES / PERSONALES (NO COMMITEAR) ═══
+resources/API KEYS USADAS.txt
+resources/Ideas proyecto ML.txt
+
+# ═══ PRESENTACIÓN: solo el final ═══
+resources/Presentacion.html
+resources/Presentacion_test.html
+resources/Presentacion_test_EMBEBIDA.html
+resources/Presentacion_EMBEBIDA.html
+
+# ═══ DATOS PESADOS — LIBRO DE APERTURAS LICHESS ELITE (~2.6 GB) ═══
+src/data/Libro aperturas/
+*.pgn
+
+# ═══ BASURA "Guardar como" del navegador ═══
+*_files/
