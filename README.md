@@ -42,6 +42,9 @@ Sistema que analiza el repertorio completo de un jugador de Lichess para:
 
 <div align="center">
 
+<img width="800" height="377" alt="GIF Presentacion" src="https://github.com/user-attachments/assets/db10b2d9-0bb8-44bb-8912-75ad06df8321" />
+
+
 <img width="800" height="428" alt="Demo Lichess Opening Trainer Pro" src="https://github.com/user-attachments/assets/ebdd2dd8-e73b-4c77-8242-76951b722791" />
 
 *Flujo completo: Análisis de repertorio → Clustering automático → Recomendaciones personalizadas*
