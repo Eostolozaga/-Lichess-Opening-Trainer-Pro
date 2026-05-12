@@ -1,19 +1,15 @@
+<div style="margin-left: 50px">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td width="110" valign="middle">
 <img src="resources/img/Logo.jpg" alt="Lichess Opening Trainer Pro" width="100"/>
 </td>
 <td valign="middle">
-
-# Lichess Opening Trainer Pro
-
-**Sistema de Análisis Inteligente de Repertorio de Ajedrez con Machine Learning**
-
+<h1>Lichess Opening Trainer Pro</h1>
+<strong>Sistema de Análisis Inteligente de Repertorio de Ajedrez con Machine Learning</strong>
 </td>
 </tr>
 </table>
-
-<div align="center">
 
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.x-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://streamlit.io)
@@ -281,7 +277,4 @@ Bootcamp Data Science e IA Generativa · 2026
 Distribuido bajo licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
-
-
-</div>
 
