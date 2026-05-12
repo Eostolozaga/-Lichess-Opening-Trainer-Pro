@@ -8,6 +8,7 @@ import numpy as np, pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 from stockfish import Stockfish
+from pathlib import Path
 
 st.set_page_config(
     page_title="Lichess Opening Trainer Pro",
@@ -281,22 +282,22 @@ input[type="checkbox"] { accent-color: #3b82f6 !important; width: 14px !importan
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# RUTAS
+# RUTAS (RELATIVAS - Compatible con cualquier sistema)
 # ══════════════════════════════════════════════════════════════════════════════
-PROJECT_ROOT      = r"C:\Users\Eneko\Desktop\Ejercicios Data\Proyectos\Proyecto ML"
-DATA_DIR          = os.path.join(PROJECT_ROOT, "src", "data")
-CSV_DIR           = os.path.join(DATA_DIR, "CSV")
-PKL_DIR           = os.path.join(DATA_DIR, "PKL")
-ENGINES_DIR       = os.path.join(PROJECT_ROOT, "resources", "engines")
-STOCKFISH_PATH    = os.path.join(ENGINES_DIR, "stockfish-windows-x86-64-avx2.exe")
-PKL_PATH          = os.path.join(PKL_DIR, "theory_db.pkl")
-KM_PATH           = os.path.join(PKL_DIR, "km_apertura_pura.pkl")
-SCALER_PATH       = os.path.join(PKL_DIR, "scaler_apertura_pura.pkl")
-FILENAME_ML       = os.path.join(CSV_DIR, "master_game_level_ml.csv")
-FILENAME_BLUNDERS = os.path.join(CSV_DIR, "blunders_pendientes.csv")
-RECURSOS_PATH     = os.path.join(CSV_DIR, "chess_resources_v3.csv")
+PROJECT_ROOT      = Path(__file__).parent  # Raíz del proyecto (dinámico)
+DATA_DIR          = PROJECT_ROOT / "src" / "data"
+CSV_DIR           = DATA_DIR / "CSV"
+PKL_DIR           = DATA_DIR / "PKL"
+ENGINES_DIR       = PROJECT_ROOT / "resources" / "engines"
+STOCKFISH_PATH    = ENGINES_DIR / "stockfish-windows-x86-64-avx2.exe"
+PKL_PATH          = PKL_DIR / "theory_db.pkl"
+KM_PATH           = PKL_DIR / "km_apertura_pura.pkl"
+SCALER_PATH       = PKL_DIR / "scaler_apertura_pura.pkl"
+FILENAME_ML       = CSV_DIR / "master_game_level_ml.csv"
+FILENAME_BLUNDERS = CSV_DIR / "blunders_pendientes.csv"
+RECURSOS_PATH     = CSV_DIR / "chess_resources_v3.csv"
 for _d in [CSV_DIR, PKL_DIR]:
-    os.makedirs(_d, exist_ok=True)
+    _d.mkdir(parents=True, exist_ok=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -716,19 +717,12 @@ def buscar_recursos(apertura, color_jugador, df_rec, rating, nivel,
     PRIORIDAD 2 — Apertura exacta + Cualquier nivel   (si P1 insuficiente)
     PRIORIDAD 3 — Recursos generales sin match        (último recurso)
 
-    is_free_filter=1  → SIEMPRE Lichess Studies (links siempre válidos)
-    is_free_filter=0  → solo de pago (CSV)
-    is_free_filter=None → todos (CSV)
+    is_free_filter=1  → solo gratuitos
+    is_free_filter=0  → solo de pago
+    is_free_filter=None → todos
     """
     if ya_recomendados is None:
         ya_recomendados = set()
-
-    # ─── CANAL GRATUITO: siempre Lichess Studies ──────────────────────────
-    # Los links de video/PDF del CSV tienden a caducar y romperse.
-    # Lichess Studies es siempre válido, gratuito y actualizado.
-    if is_free_filter == 1:
-        return buscar_estudios_lichess(apertura, lichess_token, top_n)
-
     tier_obj = NIVEL_A_TIER.get(nivel, "intermediate")
     terminos  = normalizar_apertura(apertura)
 
@@ -918,7 +912,7 @@ def cargar_teoria():
 
 def crear_stockfish():
     """Crea una instancia fresca de Stockfish. NO se cachea para evitar estado corrupto."""
-    sf = Stockfish(path=STOCKFISH_PATH, parameters={"Threads": 4, "Hash": 512})
+    sf = Stockfish(path=str(STOCKFISH_PATH), parameters={"Threads": 4, "Hash": 512})
     sf.set_depth(16)
     return sf
 
@@ -1246,8 +1240,11 @@ def render_profesor_virtual(nivel, rating, accuracy_media, mensaje_custom=None):
 def render_tablero_profesional(fen, apertura_nombre="", jugadas_siguientes=None, width=380):
     """
     Renderiza un tablero de ajedrez SVG de alta calidad para una posición FEN.
-    Usa st.markdown (SVG inline) en lugar de components.html para máxima
-    compatibilidad dentro de tabs y columnas de Streamlit.
+    Args:
+        fen: Posición FEN válida
+        apertura_nombre: Nombre de la apertura o blunder
+        jugadas_siguientes: Lista de jugadas en notación algebraica (opcional)
+        width: Ancho en píxeles
     """
     try:
         board = chess.Board(fen)
@@ -1255,7 +1252,7 @@ def render_tablero_profesional(fen, apertura_nombre="", jugadas_siguientes=None,
         st.warning(f"FEN inválido: {fen}")
         return
 
-    svg_raw = chess.svg.board(
+    svg = chess.svg.board(
         board=board,
         size=width,
         coordinates=True,
@@ -1267,54 +1264,57 @@ def render_tablero_profesional(fen, apertura_nombre="", jugadas_siguientes=None,
         }
     )
 
-    turno       = "Blancas" if board.turn else "Negras"
+    turno      = "Blancas" if board.turn else "Negras"
     turno_color = "#3b82f6" if board.turn else "#94a3b8"
-    titulo      = f"📖 {apertura_nombre}" if apertura_nombre else "♟️ Posición"
 
     moves_html = ""
     if jugadas_siguientes:
-        chips = "".join(
-            f'<span style="display:inline-block;background:rgba(59,130,246,0.15);color:#60a5fa;'
-            f'border:1px solid rgba(59,130,246,0.3);padding:3px 9px;border-radius:4px;'
-            f'font-size:0.78rem;margin:0 0.25rem 0.25rem 0;font-family:Courier New,monospace;'
-            f'font-weight:600;">{m}</span>'
-            for m in jugadas_siguientes
-        )
-        moves_html = (
-            f'<div style="margin-top:0.6rem;padding:0.6rem;background:rgba(10,14,26,0.8);'
-            f'border-radius:6px;border:1px solid #1e3a6e;">'
-            f'<div style="color:#60a5fa;font-size:0.75rem;font-weight:600;margin-bottom:0.35rem;'
-            f'text-transform:uppercase;letter-spacing:0.1em;">💡 Jugadas principales</div>'
-            f'{chips}</div>'
-        )
+        chips = "".join(f'<span class="move-chip">{m}</span>' for m in jugadas_siguientes)
+        moves_html = f'<div class="moves-section"><div class="moves-title">💡 Jugadas principales</div>{chips}</div>'
 
-    st.markdown(f"""
-<div style="background:linear-gradient(135deg,#0f1628 0%,#0a1428 100%);
-            border:1px solid #1e3a6e;border-radius:10px;padding:1rem;
-            max-width:{width + 60}px;margin:0 auto;">
-  <div style="text-align:center;margin-bottom:0.6rem;padding-bottom:0.6rem;
-              border-bottom:1px solid #1e3a6e;">
-    <div style="color:#e2e8f0;font-size:1rem;font-weight:700;
-                font-family:Rajdhani,sans-serif;margin-bottom:0.3rem;">{titulo}</div>
-    <span style="display:inline-block;background:{turno_color};color:white;
-                 padding:2px 9px;border-radius:4px;font-size:0.75rem;
-                 font-weight:600;text-transform:uppercase;">Juegan {turno}</span>
-  </div>
-  <div style="display:flex;justify-content:center;background:#1a2540;
-              padding:0.6rem;border-radius:8px;">
-    {svg_raw}
-  </div>
-  {moves_html}
-  <div style="margin-top:0.4rem;padding:0.4rem 0.6rem;
-              background:rgba(10,14,26,0.9);border-radius:4px;
-              border:1px solid #1e3a6e;">
-    <div style="color:#94a3b8;font-size:0.62rem;text-transform:uppercase;
-                letter-spacing:0.1em;margin-bottom:0.15rem;">FEN</div>
-    <div style="color:#94a3b8;font-family:Courier New,monospace;font-size:0.68rem;
-                word-break:break-all;">{fen}</div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
+    html_code = f"""
+    <style>
+    .chess-widget {{
+        background: linear-gradient(135deg,#0f1628 0%,#0a1428 100%);
+        border:1px solid #1e3a6e; border-radius:12px; padding:1.2rem;
+        box-shadow:0 8px 24px rgba(0,0,0,0.3); max-width:{width+80}px; margin:0 auto;
+    }}
+    .chess-header {{ text-align:center; margin-bottom:0.8rem; padding-bottom:0.8rem; border-bottom:1px solid #1e3a6e; }}
+    .apertura-name {{ color:#e2e8f0; font-size:1.1rem; font-weight:700; margin-bottom:0.4rem; }}
+    .turno-indicator {{
+        display:inline-block; background:{turno_color}; color:white;
+        padding:3px 10px; border-radius:4px; font-size:0.8rem; font-weight:600; text-transform:uppercase;
+    }}
+    .board-container {{
+        display:flex; justify-content:center; margin:0.8rem 0;
+        background:#1a2540; padding:0.8rem; border-radius:8px;
+    }}
+    .board-container svg {{ border-radius:4px; box-shadow:0 4px 12px rgba(0,0,0,0.2); }}
+    .moves-section {{ margin-top:0.7rem; padding:0.7rem; background:rgba(10,14,26,0.8); border-radius:6px; border:1px solid #1e3a6e; }}
+    .moves-title {{ color:#60a5fa; font-size:0.78rem; font-weight:600; margin-bottom:0.4rem; text-transform:uppercase; letter-spacing:0.1em; }}
+    .move-chip {{
+        display:inline-block; background:rgba(59,130,246,0.15); color:#60a5fa;
+        border:1px solid rgba(59,130,246,0.3); padding:3px 9px; border-radius:4px;
+        font-size:0.78rem; margin:0 0.25rem 0.25rem 0; font-family:'Courier New',monospace; font-weight:600;
+    }}
+    .fen-section {{ margin-top:0.5rem; padding:0.5rem 0.7rem; background:rgba(15,22,40,0.9); border-radius:4px; border:1px solid #1e3a6e; }}
+    .fen-label {{ color:#94a3b8; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.2rem; }}
+    .fen-text {{ color:#cbd5e1; font-family:'Courier New',monospace; font-size:0.7rem; word-break:break-all; }}
+    </style>
+    <div class="chess-widget">
+        <div class="chess-header">
+            <div class="apertura-name">{'📖 '+apertura_nombre if apertura_nombre else '♟️ Posición'}</div>
+            <span class="turno-indicator">Juegan {turno}</span>
+        </div>
+        <div class="board-container">{svg}</div>
+        {moves_html}
+        <div class="fen-section">
+            <div class="fen-label">FEN</div>
+            <div class="fen-text">{fen}</div>
+        </div>
+    </div>
+    """
+    components.html(html_code, height=width + 220, scrolling=False)
 
 
 
@@ -1707,13 +1707,11 @@ if st.session_state.get("df_dash") is not None:
                 with col_btn:
                     fen_val = str(row.get("FEN", "")).strip()
                     if fen_val:
-                        btn_label = "✕" if st.session_state.tablero_blunder_idx == bl_idx else "♟"
-                        if st.button(btn_label, key=f"ver_blunder_{bl_idx}", help="Ver posición en tablero"):
+                        if st.button("♟", key=f"ver_blunder_{bl_idx}", help="Ver posición en tablero"):
                             if st.session_state.tablero_blunder_idx == bl_idx:
                                 st.session_state.tablero_blunder_idx = None
                             else:
                                 st.session_state.tablero_blunder_idx = bl_idx
-                            st.rerun()
 
                 # Mostrar tablero si está activo para este blunder
                 if st.session_state.tablero_blunder_idx == bl_idx:

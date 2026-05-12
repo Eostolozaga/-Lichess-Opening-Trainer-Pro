@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2024 Eneko - Lichess Opening Trainer Pro
+Copyright (c) 2026 Eneko - Lichess Opening Trainer Pro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,3 +38,146 @@ See requirements.txt for full list of dependencies and their respective licenses
 - License: AGPL v3
 - Website: https://lichess.org/api
 - All Lichess data is used in accordance with their Terms of Service
+
+---
+
+## Data Sources and Attribution
+
+This project aggregates links to chess educational resources from multiple 
+public sources for the purpose of personalized learning recommendations. 
+
+**IMPORTANT DISCLAIMER:**
+- We do NOT host, reproduce, or claim any rights to the content behind these links
+- All courses, videos, books, and materials remain the exclusive property of 
+  their respective creators and platforms
+- This application serves solely as a discovery and recommendation tool
+- Users are responsible for complying with the terms of service of any 
+  external platform they access through these links
+
+### Primary Resource Providers
+
+#### Modern-Chess
+- **Source:** https://www.modern-chess.com/
+- **Data Used:** Public catalog metadata (course titles, authors, URLs, difficulty levels)
+- **Scope:** ~825 course links (approximately 77% of our resource catalog)
+- **Affiliation:** We are NOT affiliated with, endorsed by, or sponsored by Modern-Chess
+- **Content Rights:** All course content, pricing, and availability subject to 
+  Modern-Chess Terms of Service
+- **Attribution:** Course metadata sourced from publicly accessible catalog
+
+#### YouTube
+- **Source:** Video metadata obtained via YouTube Data API v3
+- **Terms of Service:** https://www.youtube.com/t/terms
+- **Trademark Notice:** YouTube is a trademark of Google LLC
+- **Content Rights:** No YouTube content is hosted, downloaded, or reproduced 
+  in this application
+- **Compliance:** This application complies with YouTube API Terms of Service
+- **Data Retention:** Video metadata is cached for < 30 days in accordance with ToS
+
+#### Chessable
+- **Source:** https://www.chessable.com/
+- **Data Used:** Public course catalog metadata (titles, authors, URLs)
+- **Affiliation:** We are NOT affiliated with Chessable
+- **Content Rights:** All Chessable courses and MoveTrainers remain the property 
+  of Chessable and respective course creators
+
+#### Udemy
+- **Source:** Public course listings from https://www.udemy.com/
+- **Scope:** Chess-related course links
+- **Affiliation:** We are NOT affiliated with Udemy
+- **Content Rights:** All Udemy courses subject to Udemy Terms of Use
+
+#### Chess.com, ICC, and Other Platforms
+- **Scope:** Educational resource links aggregated from public catalogs
+- **Content Rights:** All content subject to respective platform Terms of Service
+
+### Community-Curated Resources
+- Some resources sourced from public chess education communities and channels
+- Community contributions respect public sharing permissions
+- No private or paywalled content is accessed without authorization
+
+---
+
+## Data Collection Methodology
+
+Resource metadata in this project was curated through:
+
+1. **Public API Endpoints**
+   - YouTube Data API v3 (with appropriate API key and quota management)
+   - Rate limiting and caching in compliance with API Terms of Service
+
+2. **Public Web Catalogs**
+   - Metadata extraction from publicly accessible course catalogs
+   - Respecting robots.txt directives of all scraped sites
+   - No circumvention of access controls or paywalls
+
+3. **Community Contributions**
+   - Manual curation of resources shared in public chess communities
+   - References to freely available educational content
+
+4. **What We Do NOT Do**
+   - Download or store proprietary course content (videos, PDFs, PGNs)
+   - Reproduce course descriptions or copyrighted text
+   - Bypass authentication or access controls
+   - Store user credentials or payment information
+   - Claim ownership of any third-party intellectual property
+
+---
+
+## User Responsibilities
+
+By using this application, you acknowledge that:
+
+1. **External Links:** All resource links direct you to external platforms. 
+   You are responsible for:
+   - Reviewing and accepting the terms of service of those platforms
+   - Any purchases or subscriptions you choose to make
+   - Respecting intellectual property rights of content creators
+
+2. **Content Availability:** Resource links and availability are subject to 
+   change without notice. We do not guarantee:
+   - Continued availability of any linked resource
+   - Accuracy of pricing or course details
+   - Quality or suitability of external content
+
+3. **No Endorsement:** Inclusion of a resource link does not constitute 
+   endorsement, recommendation, or guarantee of quality
+
+---
+
+## Commercial Use Notice
+
+If you intend to use this project for commercial purposes (monetization, 
+subscription services, or integration into paid products):
+
+1. **You MUST obtain appropriate licenses** from data providers where required
+2. **Contact Modern-Chess** if using their course links commercially
+3. **Review YouTube Partner Program** requirements for commercial API usage
+4. **Ensure compliance** with all platform affiliate program terms
+
+This open-source license (MIT) covers only the software code itself, NOT the 
+rights to commercial use of aggregated third-party data.
+
+---
+
+## Contact and Compliance
+
+For questions regarding data sources, attributions, or compliance:
+- Project Maintainer: Eneko Ostolozaga
+- Project Repository: [Insert GitHub URL]
+
+To request removal of specific resource links or report compliance issues, 
+please open an issue in the project repository.
+
+---
+
+## Changelog of Data Attributions
+
+- **2024-XX-XX:** Initial release with comprehensive data source attribution
+- **2024-XX-XX:** Added Modern-Chess disclaimer (77% of catalog)
+- **2024-XX-XX:** Enhanced YouTube API compliance documentation
+
+---
+
+Last Updated: 2024-XX-XX
+Version: 1.0.0
