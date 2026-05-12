@@ -1,0 +1,52 @@
+# DATOS PESADOS
+src/data/PKL/*.pkl
+src/data/CSV/*.csv
+src/data/Backups/
+*.csv
+!chess_resources_v3.csv
+
+# BINARIES
+resources/engines/*
+!resources/engines/.gitkeep
+*.exe
+*.bin
+
+# MODELOS
+src/model/production/*.pkl
+src/model/production/*.h5
+src/model/production/*.joblib
+
+# PYTHON
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+
+# JUPYTER
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# LOGS
+*.log
+logs/
+
+# VIDEOS Y GIFS PESADOS
+*.mp4
+*.gif
+resources/engines/*.zip
+.env
+Chess_Orchestrator_v2.ipynb
+src/notebooks/Scraping/Chess_Scraper.ipynb

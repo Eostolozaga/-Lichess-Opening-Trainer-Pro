@@ -1,0 +1,244 @@
+================================================================================
+ESTRUCTURA DEL PROYECTO: LICHESS OPENING TRAINER PRO
+================================================================================
+Proyecto: Lichess Opening Trainer Pro
+Ruta: C:\Users\Eneko\Desktop\Ejercicios Data\Proyectos\Proyecto ML
+Fecha: 12 de Mayo 2026
+Total de archivos: 205
+Total de carpetas: 13
+Tamaño total: ~2.8 GB
+================================================================================
+
+Proyecto ML/
+│
+├── 📁 resources/                             [Recursos del proyecto]
+│   │
+│   ├── 📁 engines/                           [Motores de ajedrez]
+│   │   ├── stockfish-windows-x86-64-avx2.exe (108.7MB)
+│   │   └── stockfish-windows-x86-64-avx2.zip (73.4MB)
+│   │
+│   ├── 📁 img/                               [Assets visuales]
+│   │   ├── Blunders.png (126.0KB)
+│   │   ├── comparativa_rf_gb.png (299.6KB)
+│   │   ├── decision_tree_aperturas.png (478.8KB)
+│   │   ├── demo.gif (584.0KB)
+│   │   ├── GIF Video Programa.gif (3.9MB)
+│   │   ├── level_balance_analysis.png (138.6KB)
+│   │   ├── Logo.jpg (84.2KB)                 ← Logo del proyecto
+│   │   ├── Nivel del usuario.png (124.9KB)
+│   │   ├── Pantalla configuracion programa.png (209.1KB)
+│   │   ├── perfil_usuario_v2.png (250.4KB)
+│   │   ├── Profe Chess.png (114.2KB)
+│   │   ├── rating_por_nivel_v2.png (54.3KB)
+│   │   ├── Repertorio blancas y negras por accuracy y teoria.png (125.1KB)
+│   │   ├── silhouette_elbow_v2.png (84.3KB)
+│   │   └── Video muestra programa.mp4 (30.4MB)
+│   │
+│   ├── API KEYS USADAS.txt (248B)
+│   ├── demo_completo.py (10.5KB)
+│   ├── Estructura memoria.txt (1.6KB)
+│   ├── Guion_Presentacion_Lichess.odt (22.7KB)
+│   ├── Ideas proyecto ML.txt (5.2KB)
+│   ├── Memoria Lichess Opening Trainer Pro.odt (119.2KB)
+│   ├── profesor_virtual.py (6.8KB)          ← Módulo Profesor Virtual
+│   ├── Prompts.txt (1.3KB)
+│   ├── README.md (14.6KB)                   ← README del proyecto
+│   └── tablero_profesional.py (5.2KB)      ← Módulo Tablero Profesional
+│
+├── 📁 src/                                   [Código fuente]
+│   │
+│   ├── 📁 data/                              [Datasets y modelos]
+│   │   │
+│   │   ├── 📁 CSV/                           [Datasets procesados]
+│   │   │   ├── blunders_pendientes.csv (10.8KB)
+│   │   │   ├── chess_resources_3tier.csv (697.2KB)
+│   │   │   ├── chess_resources_ml_ready.csv (499.0KB)
+│   │   │   ├── chess_resources_v3.csv (688.0KB)      ← Catálogo de recursos
+│   │   │   ├── master_dataset_ml.csv (1.1MB)
+│   │   │   ├── master_game_level_ml.csv (3.0MB)      ← Dataset principal
+│   │   │   ├── perfiles_lichess_final.csv (23.4KB)
+│   │   │   ├── user_opening_profiles.csv (18.0KB)
+│   │   │   └── user_profiles_summary.csv (10.7KB)
+│   │   │
+│   │   ├── 📁 Libro aperturas/               [Base teórica - 2.6GB]
+│   │   │   ├── lichess_elite_2025-01.pgn (261.4MB)
+│   │   │   ├── lichess_elite_2025-02.pgn (231.9MB)
+│   │   │   ├── lichess_elite_2025-03.pgn (272.6MB)
+│   │   │   ├── lichess_elite_2025-04.pgn (258.5MB)
+│   │   │   ├── lichess_elite_2025-05.pgn (288.5MB)
+│   │   │   ├── lichess_elite_2025-06.pgn (267.9MB)
+│   │   │   ├── lichess_elite_2025-07.pgn (265.5MB)
+│   │   │   ├── lichess_elite_2025-08.pgn (263.4MB)
+│   │   │   ├── lichess_elite_2025-09.pgn (261.6MB)
+│   │   │   └── lichess_elite_2025-10.pgn (255.5MB)
+│   │   │
+│   │   ├── 📁 PKL/                           [Modelos serializados]
+│   │   │   ├── chess_scaler.pkl (631B)
+│   │   │   ├── km_apertura_pura.pkl (71.1KB)         ← Modelo KMeans
+│   │   │   ├── scaler_apertura_pura.pkl (999B)       ← StandardScaler
+│   │   │   └── theory_db.pkl (20.1MB)                ← 327K posiciones EPD
+│   │   │
+│   │   ├── partidas_con_nivel_apertura.csv (1.4MB)
+│   │   ├── test.csv (968.1KB)
+│   │   ├── train.csv (3.7MB)
+│   │   ├── user_opening_profiles.csv (18.0KB)
+│   │   └── user_profiles_clean.csv (19.0KB)
+│   │
+│   ├── 📁 model/                             [Modelos de producción]
+│   │   └── 📁 production/
+│   │       ├── chess_analyst.py (33.1KB)
+│   │       ├── chess_analyst_5.py (16.3KB)
+│   │       ├── chess_level_classifier.joblib (19.8KB)
+│   │       ├── decision_tree_aperturas.pkl (3.4KB)
+│   │       ├── feature_cols_dt.pkl (105B)
+│   │       ├── kmeans_apertura.joblib (71.0KB)
+│   │       ├── kmeans_metadata.json (836B)
+│   │       ├── label_encoder.joblib (471B)
+│   │       ├── label_encoder_dt.pkl (525B)
+│   │       ├── metadata.json (727B)
+│   │       ├── scaler_apertura.joblib (999B)
+│   │       └── scaler_decision_tree.pkl (727B)
+│   │
+│   ├── 📁 notebooks/                         [Exploración y desarrollo]
+│   │   │
+│   │   ├── 📁 Scraping/                      [Web scraping]
+│   │   │   ├── Chess_Scraper.ipynb (256.2KB)
+│   │   │   └── Scraper Telegram.ipynb (138.2KB)
+│   │   │
+│   │   ├── chess_test.csv (896.7KB)
+│   │   ├── chess_train.csv (3.5MB)
+│   │   ├── Creacion de datos y esqueleto del programa.ipynb (44.0KB)
+│   │   ├── EDA_Recomendador_Material.ipynb (1.7MB)
+│   │   ├── mergear_recursos_v3.py (11.2KB)
+│   │   └── MODELOS_ML.ipynb (1.6MB)
+│   │
+│   └── 📁 util/                              [Utilidades]
+│       ├── chess_game_level_augmentation.py (14.1KB)
+│       ├── chess_intelligence_system.py (31.4KB)
+│       └── orquestador.py (51.6KB)
+│
+├── app_16.py (173.9KB)                       ← Aplicación principal Streamlit
+└── Chess_Orchestrator_v2.ipynb (81.7KB)
+
+================================================================================
+RESUMEN DE COMPONENTES PRINCIPALES
+================================================================================
+
+APLICACIÓN PRINCIPAL:
+  • app_16.py (173.9KB)              - Interfaz Streamlit con 3 tabs
+
+MÓDULOS CLAVE:
+  • profesor_virtual.py (6.8KB)      - Popup animado con feedback contextual
+  • tablero_profesional.py (5.2KB)  - Renderizado SVG de posiciones FEN
+
+DATASETS PRINCIPALES:
+  • master_game_level_ml.csv (3.0MB)     - 18K+ partidas con clustering
+  • chess_resources_v3.csv (688.0KB)     - 1,472 recursos de estudio
+  • theory_db.pkl (20.1MB)               - 327,000 posiciones teóricas
+
+MODELOS ML:
+  • km_apertura_pura.pkl (71.1KB)        - KMeans K=3 entrenado
+  • scaler_apertura_pura.pkl (999B)      - StandardScaler para features
+
+BASE TEÓRICA:
+  • Libro aperturas/ (2.6GB)             - 10 archivos PGN de partidas elite
+
+DOCUMENTACIÓN:
+  • README.md (14.6KB)                   - Documentación del proyecto
+  • Memoria Lichess Opening Trainer Pro.odt (119.2KB) - Memoria técnica
+
+ASSETS VISUALES:
+  • Logo.jpg (84.2KB)                    - Logo del proyecto
+  • GIF Video Programa.gif (3.9MB)      - Demo animado
+  • resources/img/ (15 imágenes)         - Capturas y gráficos
+
+================================================================================
+ESTADÍSTICAS DEL PROYECTO
+================================================================================
+
+Archivos por tipo:
+  • CSV:          15 archivos (datasets)
+  • PKL:          11 archivos (modelos serializados)
+  • PGN:          10 archivos (base teórica - 2.6GB)
+  • Python:       13 archivos (.py)
+  • Jupyter:       6 archivos (.ipynb)
+  • Imágenes:     15 archivos (PNG, JPG, GIF)
+  • Documentos:    5 archivos (TXT, ODT, MD)
+  • Otros:         8 archivos (JSON, JOBLIB)
+
+Tamaño por categoría:
+  • Base teórica (PGN):        2.6 GB (93%)
+  • Datasets (CSV):            ~10 MB
+  • Modelos (PKL):             ~20 MB
+  • Assets (imágenes/video):   ~40 MB
+  • Código fuente:             ~2 MB
+  • Documentación:             ~200 KB
+
+Distribución por carpeta:
+  • src/data/Libro aperturas/  2.6 GB (base teórica)
+  • src/data/CSV/              ~10 MB (datasets)
+  • src/data/PKL/              ~20 MB (modelos)
+  • resources/engines/         182 MB (Stockfish)
+  • resources/img/             ~40 MB (assets)
+  • src/notebooks/             ~5 MB (exploración)
+  • Resto:                     ~5 MB
+
+================================================================================
+FLUJO DE DATOS
+================================================================================
+
+1. INGESTA:
+   app_16.py → API Lichess → Descarga partidas PGN
+
+2. ANÁLISIS TEÓRICO:
+   theory_db.pkl (327K posiciones) → Identifica fin de teoría
+
+3. ANÁLISIS ENGINE:
+   Stockfish 16 → Evalúa 12 jugadas post-teoría → Calcula ACL
+
+4. FEATURE ENGINEERING:
+   orquestador.py → game_prep_score + game_risk_index
+
+5. CLUSTERING:
+   km_apertura_pura.pkl → Clasifica en 3 niveles (Dominio/Desarrollo/Sin Base)
+
+6. RECOMENDACIÓN:
+   chess_resources_v3.csv → Sistema de 3 prioridades → Recursos personalizados
+
+7. OUTPUT:
+   Dashboard + Plan de Estudio + Blunders (exportación a Lichess Studies)
+
+================================================================================
+NOTAS IMPORTANTES
+================================================================================
+
+• El archivo app_16.py es la versión activa del proyecto
+• Los archivos PGN (Libro aperturas/) ocupan el 93% del espacio total
+• theory_db.pkl contiene las 327,000 posiciones EPD para análisis teórico
+• chess_resources_v3.csv es el catálogo de 1,472 recursos de estudio
+• profesor_virtual.py y tablero_profesional.py son módulos independientes
+• Todos los modelos están serializados en formato PKL para carga rápida
+
+================================================================================
+ESTRUCTURA OPTIMIZADA PARA GITHUB
+================================================================================
+
+Archivos recomendados para .gitignore:
+  • src/data/Libro aperturas/*.pgn (2.6GB - demasiado pesados)
+  • resources/engines/*.exe (108MB - binarios)
+  • resources/engines/*.zip (73MB - archivo comprimido)
+  • src/data/CSV/master_game_level_ml.csv (3MB - generado)
+  • resources/img/*.mp4 (30MB - video)
+  • __pycache__/ (archivos temporales)
+  • .ipynb_checkpoints/ (checkpoints de Jupyter)
+
+Tamaño estimado del repo sin archivos grandes: ~50 MB
+
+================================================================================
+FIN DEL DOCUMENTO
+================================================================================
+Generado: 12 de Mayo 2026
+Autor: Eneko Ostolozaga
+Proyecto: Lichess Opening Trainer Pro
+Bootcamp: Data Science e IA Generativa
+================================================================================
