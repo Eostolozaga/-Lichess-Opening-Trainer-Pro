@@ -79,7 +79,7 @@ pip install -r requirements.txt
 
 Los siguientes archivos **NO están en GitHub** por tamaño (total ~80-120 MB):
 
-#### 📦 Opción A: Descarga Automática (recomendado)
+#### 📦 Descarga Automática
 ```bash
 python setup_data.py
 ```
@@ -88,26 +88,6 @@ Este script descargará automáticamente:
 - ✅ `stockfish-windows-x86-64-avx2.exe` (motor de análisis)
 - ✅ `theory_db.pkl` (base de datos teórica con 327K posiciones)
 - ✅ Datasets CSV de ejemplo
-
-#### 📦 Opción B: Descarga Manual
-
-**1. Stockfish Engine (~15-20 MB)**
-- Descargar desde: https://stockfishchess.org/download/
-- Versión recomendada: `stockfish-windows-x86-64-avx2`
-- Ubicar en: `resources/engines/stockfish-windows-x86-64-avx2.exe`
-
-**2. Base Teórica theory_db.pkl (~50-70 MB)**
-- Descargar desde: [ENLACE_GOOGLE_DRIVE_O_DROPBOX]
-- Ubicar en: `src/data/PKL/theory_db.pkl`
-
-**3. Datasets de Ejemplo (opcional)**
-- Descargar desde: [ENLACE_GOOGLE_DRIVE]
-- Ubicar en: `src/data/CSV/`
-
-### 5. Ejecutar la Aplicación
-```bash
-streamlit run app_16.py
-```
 
 ---
 
