@@ -106,7 +106,7 @@ Este script descargará automáticamente:
 
 ### 5. Ejecutar la Aplicación
 ```bash
-streamlit run app_17.py
+streamlit run app_16.py
 ```
 
 ---
@@ -116,7 +116,7 @@ streamlit run app_17.py
 ```
 Proyecto ML/
 │
-├── app_17.py                    # 🎯 Aplicación principal Streamlit
+├── app_16.py                    # 🎯 Aplicación principal Streamlit
 ├── requirements.txt             # Dependencias Python
 ├── setup_data.py                # Script de descarga de archivos pesados
 ├── README.md                    # Este archivo
