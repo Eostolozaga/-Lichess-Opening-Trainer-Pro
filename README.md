@@ -97,41 +97,78 @@ Este script descargará automáticamente:
 ## 📁 Estructura del Proyecto
 
 ```
-Proyecto ML/
+Lichess-Opening-Trainer-Pro/
 │
-├── app_16.py                    # 🎯 Aplicación principal Streamlit
-├── requirements.txt             # Dependencias Python
-├── setup_data.py                # Script de descarga de archivos pesados
-├── README.md                    # Este archivo
-├── Memoria_Lichess_Opening_Trainer_Pro.odt  # Documentación técnica
-├── Logo.jpg                     # Logo del proyecto
+├── app_16.py                              # 🎯 Aplicación principal Streamlit
+├── requirements.txt                       # ✅ Dependencias Python
+├── README.md                              # ✅ Este archivo
+├── LICENSE.txt                            # ✅ Licencia MIT
+├── .gitignore                             # ✅ Configuración Git
+├── Chess_Orchestrator_v2.ipynb            # ✅ Notebook de orquestación
+├── generar_graficas_presentacion.py       # ✅ Script de visualización
 │
 ├── src/
 │   ├── data/
 │   │   ├── CSV/
-│   │   │   ├── chess_resources_v3.csv     # ✅ Catálogo de recursos (incluido)
-│   │   │   ├── blunders_pendientes.csv    # ✅ Blunders (incluido)
-│   │   │   ├── master_game_level_ml.csv   # ⚠️ Excluido (generado)
-│   │   │   └── [otros CSV generados]      # ⚠️ Excluidos
+│   │   │   ├── chess_resources_v3.csv           # ✅ Catálogo 900+ recursos
+│   │   │   ├── blunders_pendientes.csv          # ✅ Template blunders
+│   │   │   ├── master_dataset_ml.csv            # ⚠️ Dataset principal (generado)
+│   │   │   ├── master_game_level_ml.csv         # ⚠️ Partidas con nivel (generado)
+│   │   │   ├── user_opening_profiles.csv        # ⚠️ Perfiles usuario (generado)
+│   │   │   ├── clustering_*.csv                 # ⚠️ Métricas clustering (generado)
+│   │   │   └── validation_*.csv                 # ⚠️ Validación modelos (generado)
 │   │   │
 │   │   ├── PKL/
-│   │   │   ├── km_apertura_pura.pkl       # ✅ Modelo KMeans (incluido)
-│   │   │   ├── scaler_apertura_pura.pkl   # ✅ Scaler (incluido)
-│   │   │   └── theory_db.pkl              # ❌ EXCLUIDO (descargar)
+│   │   │   ├── km_apertura_pura_v2.pkl          # ✅ Modelo KMeans K=3
+│   │   │   ├── scaler_apertura_pura_v2.pkl      # ✅ Scaler normalización
+│   │   │   ├── cluster_label_mapping_v2.pkl     # ✅ Mapeo etiquetas
+│   │   │   └── theory_db.pkl                    # ❌ DESCARGAR - 327K posiciones
 │   │   │
-│   │   └── Backups/                       # ❌ Excluido
+│   │   ├── Libro aperturas/
+│   │   │   └── lichess_elite_2025-*.pgn         # ❌ Opcional - PGNs elite (10 archivos)
+│   │   │
+│   │   └── Backups/                             # ⚠️ Generado automáticamente
+│   │
+│   ├── model/
+│   │   └── production/
+│   │       ├── chess_analyst_5.py               # ✅ Sistema análisis principal
+│   │       ├── kmeans_apertura.joblib           # ✅ Modelo clustering
+│   │       ├── scaler_apertura.joblib           # ✅ Scaler producción
+│   │       ├── decision_tree_aperturas.pkl      # ✅ Árbol decisión
+│   │       ├── chess_level_classifier.joblib    # ✅ Clasificador nivel
+│   │       └── metadata.json                    # ✅ Metadatos modelo
 │   │
 │   ├── notebooks/
-│   │   └── Creacion_de_datos_y_esqueleto_del_programa.ipynb  # ✅ Incluido
+│   │   ├── MODELOS_ML.ipynb                     # ✅ Desarrollo modelos ML
+│   │   ├── EDA_Recomendador_Material.ipynb      # ✅ Análisis exploratorio
+│   │   ├── Creacion de datos y esqueleto del programa.ipynb  # ✅ Pipeline inicial
+│   │   ├── Scraping/
+│   │   │   ├── Chess_Scraper.ipynb              # ✅ Scraper recursos chess
+│   │   │   └── Scraper Telegram.ipynb           # ✅ Scraper alternativo
+│   │   └── mergear_recursos_v3.py               # ✅ Merge de datos
 │   │
 │   └── util/
-│       └── chess_game_level_augmentation.py  # ✅ Utilidades
+│       ├── chess_intelligence_system.py         # ✅ Motor análisis Stockfish
+│       ├── orquestador.py                       # ✅ Orquestador tareas
+│       └── chess_game_level_augmentation.py     # ✅ Augmentación datos
 │
 └── resources/
     ├── engines/
-    │   └── stockfish-windows-x86-64-avx2.exe  # ❌ EXCLUIDO (descargar)
+    │   ├── stockfish-windows-x86-64-avx2.exe    # ❌ DESCARGAR - Motor Stockfish
+    │   └── .gitkeep                             # ✅ Mantiene carpeta
     │
-    └── img/                                    # ✅ Recursos visuales
+    ├── img/                                     # ✅ Assets visuales
+    │   ├── Logo.jpg                             # Logo principal
+    │   ├── GIF Video Programa.gif               # Demo animada
+    │   ├── Infografia Chess.png                 # Arquitectura sistema
+    │   ├── Nivel del usuario.png                # Visualización clustering
+    │   └── [20+ gráficas análisis]
+    │
+    ├── profesor_virtual.py                      # ✅ Componente Profesor Virtual
+    ├── tablero_profesional.py                   # ✅ Renderizador SVG tablero
+    ├── demo_completo.py                         # ✅ Script demostración
+    ├── Presentacion_FINAL.html                  # ✅ Presentación proyecto
+    └── Memoria Lichess Opening Trainer Pro.odt  # ✅ Documentación técnica
 ```
 
 **Leyenda:**
