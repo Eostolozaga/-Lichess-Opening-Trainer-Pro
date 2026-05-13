@@ -32,7 +32,7 @@ Sistema que analiza el repertorio completo de un jugador de Lichess para:
 ### 🔬 Flujo de Datos
 1. **Ingesta:** Descarga de partidas vía API Lichess (Rating incluido)
 2. **Análisis Teórico:** Cruce con DB local (327K posiciones GM) → identifica fin de teoría (máx. 15 jugadas)
-3. **Análisis de Rendimiento:** Stockfish evalúa 12 jugadas post-teoría → mide CP loss + Accuracy
+3. **Análisis de Rendimiento:** Stockfish evalúa 5 jugadas post-teoría → mide CP loss + Accuracy
 4. **Clustering:** KMeans (K=3) categoriza nivel por apertura → *sin_base*, *desarrollo*, *dominio*
 5. **Recomendación:** Sistema de 3 prioridades para recursos (libros/cursos/videos)
 
