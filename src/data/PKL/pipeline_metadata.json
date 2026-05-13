@@ -1,0 +1,96 @@
+{
+  "version": "2.0",
+  "fecha_entrenamiento": "2026-05-13T22:20:19.145718",
+  "constantes": {
+    "ACL_WINSOR_CAP": 500,
+    "FIN_TEORIA_MAX": 15,
+    "MIN_GAMES_PER_OPENING": 5,
+    "RATING_BINS": [
+      0,
+      1400,
+      1800,
+      5000
+    ],
+    "RATING_LABELS": [
+      "principiante",
+      "intermedio",
+      "avanzado"
+    ]
+  },
+  "mapeos": {
+    "CLUSTER_RAW_TO_NAME": {
+      "0": "apertura_solida",
+      "1": "apertura_media",
+      "2": "apertura_debil"
+    },
+    "CLUSTER_TO_LEVEL": {
+      "apertura_solida": "dominio",
+      "apertura_media": "desarrollo",
+      "apertura_debil": "sin_base"
+    },
+    "NIVEL_PRIORITY": {
+      "sin_base": 1,
+      "desarrollo": 2,
+      "dominio": 3
+    },
+    "PRIORITY_CATEGORIA": {
+      "riesgo": 1,
+      "neutral": 2,
+      "feeling_natural": 3,
+      "dominio": 4
+    }
+  },
+  "features": {
+    "CLUSTERING": [
+      "Fin_Teoria",
+      "acl_winsorized",
+      "game_prep_score",
+      "game_risk_index"
+    ],
+    "RATING_GAME": [
+      "Fin_Teoria",
+      "acl_winsorized",
+      "game_risk_index",
+      "game_prep_score",
+      "color_bin",
+      "Victoria"
+    ],
+    "RATING_USER": [
+      "win_rate_user",
+      "avg_teoria_user",
+      "avg_acl_user",
+      "std_acl_user",
+      "n_games_user"
+    ],
+    "COMPARATIVA": [
+      "Fin_Teoria",
+      "acl_winsorized",
+      "game_risk_index",
+      "game_prep_score",
+      "color_bin",
+      "Victoria",
+      "win_rate_user",
+      "avg_teoria_user",
+      "avg_acl_user",
+      "std_acl_user",
+      "n_games_user"
+    ]
+  },
+  "modelo_ganador": {
+    "nombre": "LightGBM",
+    "hiperparametros": "{'learning_rate': 0.05, 'max_depth': -1, 'n_estimators': 200, 'num_leaves': 31}",
+    "metricas_test": {
+      "accuracy": 0.6524079320113314,
+      "balanced_accuracy": 0.6573631311023785,
+      "f1_macro": 0.6489037766326052,
+      "f1_weighted": 0.6547337526807177,
+      "precision_macro": 0.6553414762290414,
+      "recall_macro": 0.6573631311023785,
+      "cohen_kappa": 0.4688817775724252,
+      "mcc": 0.4740007096898524,
+      "log_loss": 0.8432652653121421,
+      "roc_auc_ovr": 0.8620953492628516
+    }
+  },
+  "fuente_accuracy": "project_module"
+}
