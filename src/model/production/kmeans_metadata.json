@@ -1,0 +1,22 @@
+{
+  "model": "KMeans",
+  "version": "v1-apertura-pura",
+  "k": 3,
+  "features": [
+    "Fin_Teoria",
+    "acl_winsorized",
+    "game_prep_score",
+    "game_risk_index"
+  ],
+  "cluster_names": {
+    "0": "apertura_solida",
+    "1": "apertura_media",
+    "2": "apertura_debil"
+  },
+  "silhouette": 0.4151,
+  "davies_bouldin": 0.8006,
+  "n_partidas": 17979,
+  "trained_at": "2026-05-07T17:27:43.191562",
+  "note": "Clusters basados en comportamiento de apertura puro. Victoria excluida intencionalmente para evitar contaminar el nivel de apertura con el resultado. Rating usado solo como validación externa (Kruskal-Wallis p<0.001).",
+  "usage": "scaler = joblib.load(\"scaler_apertura.joblib\"); km = joblib.load(\"kmeans_apertura.joblib\"); nivel = km.predict(scaler.transform([[Fin_Teoria, acl, prep, risk]]))[0]"
+}

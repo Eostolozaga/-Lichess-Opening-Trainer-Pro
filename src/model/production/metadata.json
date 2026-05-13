@@ -1,0 +1,33 @@
+{
+  "model": "KNN",
+  "version": "v3-user-level",
+  "target": "nivel_3class",
+  "classes": [
+    "avanzado",
+    "intermedio",
+    "principiante"
+  ],
+  "features": [
+    "win_rate",
+    "avg_teoria",
+    "avg_acl",
+    "std_acl",
+    "avg_prep",
+    "avg_risk",
+    "pct_theory_exp",
+    "pct_feeling_nat",
+    "pct_critical",
+    "n_games"
+  ],
+  "n_features": 10,
+  "n_users_train": 99,
+  "cv_f1_kfold": 0.8266,
+  "cv_f1_loo": 0.786,
+  "trained_at": "2026-05-13T16:27:14.355752",
+  "rating_bins": {
+    "principiante": "<1400",
+    "intermedio": "1400-1800",
+    "avanzado": ">=1800"
+  },
+  "note": "Modelo a nivel de usuario (98 perfiles). Input = perfil agregado de partidas del usuario."
+}
