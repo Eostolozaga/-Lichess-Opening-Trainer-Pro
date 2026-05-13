@@ -9,6 +9,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 from stockfish import Stockfish
 from pathlib import Path
+from src.util.chess_game_level_augmentation import acpl_to_accuracy
 
 st.set_page_config(
     page_title="Lichess Opening Trainer Pro",
@@ -364,8 +365,6 @@ _WORD_TERMS = {"slav","pirc","bird","reti","benoni","benko","catalan","french","
 # ══════════════════════════════════════════════════════════════════════════════
 # FUNCIONES AUXILIARES
 # ══════════════════════════════════════════════════════════════════════════════
-def acpl_to_accuracy(acpl):
-    return round(float(max(0, min(100, 100 * np.exp(-0.0035 * acpl)))), 1)
 
 def _term_in_text(term, text):
     if term in _WORD_TERMS:
